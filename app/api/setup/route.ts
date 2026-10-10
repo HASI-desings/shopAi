@@ -21,7 +21,7 @@ export async function GET(req: Request) {
   if (!process.env.SETUP_TOKEN || token !== process.env.SETUP_TOKEN) return new NextResponse("Not found", { status: 404 });
   const { db } = admin(), log: string[] = []; let errors = 0, pending = false;
   const step = async (what: string, p: Promise<unknown>) => { try { await p; log.push(`created ${what}`); } catch (e: any) { if (e.code === 409) log.push(`ok (exists) ${what}`); else { errors++; log.push(`ERROR ${what}: ${e.message}`); } } };
-  await step("database meeru", db.createDatabase(DB, "Meeru"));
+  await step("database meeru", db.create(DB, "Meeru"));
   for (const [col, { attrs, idx }] of Object.entries(SCHEMA)) {
     await step(`collection ${col}`, db.createCollection(DB, col, col, [], false));
     for (const a of attrs) {
