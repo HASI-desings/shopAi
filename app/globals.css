@@ -1,0 +1,19 @@
+@tailwind base; @tailwind components; @tailwind utilities;
+:root { color-scheme: dark; }
+html { background: #060A13; }
+body { @apply bg-ink text-paper font-sans antialiased; font-feature-settings: "tnum"; }
+::selection { background: #3EE0C1; color: #060A13; }
+:focus-visible { outline: 2px solid #3EE0C1; outline-offset: 2px; }
+/* Ledger paper: ruled lines and a margin rule, the visual language of bookkeeping */
+.ledger { background-image: linear-gradient(to bottom, transparent 31px, rgba(143,160,188,.07) 32px); background-size: 100% 32px; position: relative; }
+.ledger::before { content: ""; position: absolute; inset: 0 auto 0 clamp(16px, 5vw, 72px); width: 1px; background: linear-gradient(#12806C99, transparent 80%); pointer-events: none; }
+.panel { @apply rounded-xl border border-line bg-panel/80; }
+.btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors disabled:opacity-50; }
+.btn-primary { @apply bg-tide text-ink hover:bg-white; }
+.btn-ghost { @apply border border-line text-paper hover:border-mist; }
+.field { @apply w-full rounded-lg border border-line bg-navy px-3 py-2.5 text-sm text-paper placeholder:text-mist/60 focus:border-tide; }
+.rise { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+@media (prefers-reduced-motion: reduce) { .rise { animation: none; } * { transition: none !important; } }
+input[type=range] { accent-color: #3EE0C1; }
+details > summary { list-style: none; cursor: pointer; } details > summary::-webkit-details-marker { display: none; }

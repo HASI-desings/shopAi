@@ -1,0 +1,7 @@
+import { redirect } from "next/navigation";
+import { requireUser } from "@/lib/appwrite";
+import Dashboard from "@/components/Dashboard";
+export default async function Page() {
+  const u = await requireUser(); if (!u) redirect("/login");
+  return <Dashboard />;
+}
